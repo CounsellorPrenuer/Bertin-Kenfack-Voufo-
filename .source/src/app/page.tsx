@@ -29,10 +29,14 @@ export default function Home() {
     { name: "Admission Guidance", description: "Step-by-step help for college admissions." }
   ];
 
-  const defaultPackages = [1, 2, 3, 4, 5, 6].map(num => ({
-    name: `Mentoria Package ${num}`,
-    fallbackImg: `/Bertin-Kenfack-Voufo-/Mentoria${num}.png`
-  }));
+  const defaultPackages = [
+    { name: "Discover", price: "₹5,500", features: ["Psychometric Assessment", "Career counseling session", "Stream selection", "Detailed report"], featured: false },
+    { name: "Discover Plus", price: "₹15,000", features: ["Everything in Discover", "Multiple counseling sessions", "Long term planning", "Parent involvement"], featured: true },
+    { name: "Achieve Online", price: "₹5,999", features: ["Online Assessment", "Virtual counseling", "Career roadmap"], featured: false },
+    { name: "Achieve Plus", price: "₹10,500", features: ["Everything in Achieve", "In-person counseling", "Action plan execution"], featured: true },
+    { name: "Ascend Online", price: "₹6,499", features: ["Skill gap analysis", "Virtual mentoring", "Industry insights"], featured: false },
+    { name: "Ascend Plus", price: "₹10,599", features: ["Everything in Ascend", "Resume building", "Interview preparation"], featured: true }
+  ];
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
@@ -110,16 +114,38 @@ export default function Home() {
       </section>
 
       <section id="packages" className="py-20 px-4 container mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-12 text-primary">Mentoria Packages</h2>
-        <div className="grid md:grid-cols-2 gap-10">
+        <h2 className="text-4xl font-bold text-center mb-4 text-primary">Mentoria Packages</h2>
+        <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">Choose the right plan to accelerate your career journey.</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(data.packages?.length > 0 ? data.packages : defaultPackages).map((pkg: any, idx: number) => {
+            const isFeatured = pkg.featured === true;
             return (
-            <div key={idx} className="flex justify-center">
-              {pkg.image ? (
-                <img src={urlFor(pkg.image).width(1200).url()} alt={pkg.name} className="max-w-full h-auto rounded-xl shadow-lg border border-gray-200" />
-              ) : (
-                <img src={pkg.fallbackImg} alt={pkg.name} className="max-w-full h-auto rounded-xl shadow-lg border border-gray-200" />
+            <div key={idx} className={`rounded-2xl overflow-hidden transition duration-300 flex flex-col ${isFeatured ? 'border-2 border-secondary shadow-2xl relative scale-105 z-10' : 'border border-gray-200 shadow-xl'}`}>
+              {isFeatured && (
+                <div className="bg-secondary text-white text-center py-2 text-sm font-bold uppercase tracking-wider">
+                  Recommended
+                </div>
               )}
+              <div className="bg-primary p-6 text-white text-center border-b-4 border-secondary">
+                <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
+                <div className="text-3xl font-extrabold">{pkg.price || 'Contact for price'}</div>
+              </div>
+              <div className="p-8 flex flex-col flex-grow bg-white">
+                <ul className="mb-8 space-y-4 flex-grow">
+                  {(pkg.features || []).map((feature: string, fIdx: number) => (
+                    <li key={fIdx} className="flex items-start">
+                      <svg className="w-5 h-5 text-secondary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                  {(!pkg.features || pkg.features.length === 0) && (
+                    <li className="text-gray-500 italic text-sm">{pkg.description || 'Comprehensive guidance for your career.'}</li>
+                  )}
+                </ul>
+                <a href="#contact" className={`block w-full text-center font-bold py-4 rounded-xl transition ${isFeatured ? 'bg-secondary text-white hover:bg-yellow-600' : 'bg-gray-100 text-primary hover:bg-gray-200'}`}>
+                  Choose Package
+                </a>
+              </div>
             </div>
             );
           })}
