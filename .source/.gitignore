@@ -1,0 +1,6 @@
+node_modules/
+.next/
+out/
+sanity-studio/
+.env*
+.DS_Store
