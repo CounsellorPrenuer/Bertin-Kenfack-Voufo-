@@ -7,14 +7,14 @@ export default function Home() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    const query = \{
+    const query = `{
       "settings": *[_type == "siteSettings"][0],
       "home": *[_type == "homePage"][0],
       "founder": *[_type == "founder"][0],
       "services": *[_type == "service"] | order(_createdAt asc),
       "packages": *[_type == "mentoriaPackage"] | order(_createdAt asc),
       "testimonials": *[_type == "testimonial"] | order(_createdAt asc)
-    }\;
+    }`;
     
     client.fetch(query).then((res) => {
       setData(res);
@@ -94,7 +94,7 @@ export default function Home() {
                 {service.image ? (
                   <img src={urlFor(service.image).width(400).url()} alt={service.name} className="w-full h-48 object-cover rounded-xl mb-6" />
                 ) : (
-                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">?</div>
+                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✓</div>
                 )}
                 <h3 className="text-2xl font-bold mb-4 text-gray-800">{service.name}</h3>
                 <p className="text-gray-600">{service.description}</p>
@@ -116,13 +116,13 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Discover</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?5,500</span>
+                      <span className="text-3xl font-bold text-gray-800">₹5,500</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Psychometric Assessment</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Career counseling session</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Stream selection</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Detailed report</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Psychometric Assessment</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Career counseling session</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Stream selection</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Detailed report</li>
                    </ul>
                    <button className="w-full bg-indigo-100 text-[#4169E1] font-bold py-3 rounded-full hover:bg-indigo-200 transition">BUY NOW</button>
                 </div>
@@ -131,13 +131,13 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Discover Plus</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?15,000</span>
+                      <span className="text-3xl font-bold text-gray-800">₹15,000</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Psychometric Assessment (includes personality, aptitude, and interest)</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Multiple career counseling sessions</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Stream and career path selection</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Detailed report and continuous guidance</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Psychometric Assessment (includes personality, aptitude, and interest)</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Multiple career counseling sessions</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Stream and career path selection</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Detailed report and continuous guidance</li>
                    </ul>
                    <button className="w-full bg-[#4169E1] text-white font-bold py-3 rounded-full hover:bg-blue-700 transition shadow-md">BUY NOW</button>
                 </div>
@@ -152,12 +152,12 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Achieve Online</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?5,999</span>
+                      <span className="text-3xl font-bold text-gray-800">₹5,999</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Complete online assessment</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Virtual career counseling</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Career roadmap generation</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Complete online assessment</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Virtual career counseling</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Career roadmap generation</li>
                    </ul>
                    <button className="w-full bg-indigo-100 text-[#4169E1] font-bold py-3 rounded-full hover:bg-indigo-200 transition">BUY NOW</button>
                 </div>
@@ -166,13 +166,13 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Achieve Plus</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?10,500</span>
+                      <span className="text-3xl font-bold text-gray-800">₹10,500</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Comprehensive career mapping</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Dedicated in-person counseling sessions</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Action plan execution support</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Specialized mentoring & follow-ups</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Comprehensive career mapping</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Dedicated in-person counseling sessions</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Action plan execution support</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Specialized mentoring & follow-ups</li>
                    </ul>
                    <button className="w-full bg-[#4169E1] text-white font-bold py-3 rounded-full hover:bg-blue-700 transition shadow-md">BUY NOW</button>
                 </div>
@@ -187,12 +187,12 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Ascend Online</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?6,499</span>
+                      <span className="text-3xl font-bold text-gray-800">₹6,499</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> In-depth skill gap analysis</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Virtual professional mentoring</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Actionable industry insights</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> In-depth skill gap analysis</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Virtual professional mentoring</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Actionable industry insights</li>
                    </ul>
                    <button className="w-full bg-indigo-100 text-[#4169E1] font-bold py-3 rounded-full hover:bg-indigo-200 transition">BUY NOW</button>
                 </div>
@@ -201,13 +201,13 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Ascend Plus</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?10,599</span>
+                      <span className="text-3xl font-bold text-gray-800">₹10,599</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Professional resume building & review</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Interview preparation and mock sessions</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Personal branding strategies (LinkedIn)</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Continuous career progression tracking</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Professional resume building & review</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Interview preparation and mock sessions</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Personal branding strategies (LinkedIn)</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Continuous career progression tracking</li>
                    </ul>
                    <button className="w-full bg-[#4169E1] text-white font-bold py-3 rounded-full hover:bg-blue-700 transition shadow-md">BUY NOW</button>
                 </div>
@@ -222,12 +222,12 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Ascend Premium</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?15,499</span>
+                      <span className="text-3xl font-bold text-gray-800">₹15,499</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Comprehensive career gap analysis</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> 1-on-1 premium professional mentoring</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Direct industry connections & networking</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Comprehensive career gap analysis</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> 1-on-1 premium professional mentoring</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Direct industry connections & networking</li>
                    </ul>
                    <button className="w-full bg-indigo-100 text-[#4169E1] font-bold py-3 rounded-full hover:bg-indigo-200 transition">BUY NOW</button>
                 </div>
@@ -236,13 +236,13 @@ export default function Home() {
                       <h3 className="text-xl font-bold">Ascend Executive</h3>
                    </div>
                    <div className="text-center py-6">
-                      <span className="text-3xl font-bold text-gray-800">?20,599</span>
+                      <span className="text-3xl font-bold text-gray-800">₹20,599</span>
                    </div>
                    <ul className="space-y-3 flex-grow mb-8 px-4">
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Executive resume building & cover letter</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Advanced interview preparation</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> Complete LinkedIn profile makeover</li>
-                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">?</span> 6-month continuous career coaching</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Executive resume building & cover letter</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Advanced interview preparation</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> Complete LinkedIn profile makeover</li>
+                      <li className="flex items-start text-sm text-gray-600"><span className="text-blue-500 mr-2">✓</span> 6-month continuous career coaching</li>
                    </ul>
                    <button className="w-full bg-[#4169E1] text-white font-bold py-3 rounded-full hover:bg-blue-700 transition shadow-md">BUY NOW</button>
                 </div>
@@ -253,7 +253,7 @@ export default function Home() {
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
              <div className="grid md:grid-cols-2 p-8 gap-8">
                 <div className="flex items-center gap-6 p-4 border border-gray-100 shadow-sm rounded-xl">
-                   <div className="bg-blue-100 text-blue-600 p-4 rounded-lg flex items-center justify-center text-3xl">??</div>
+                   <div className="bg-blue-100 text-blue-600 p-4 rounded-lg flex items-center justify-center text-3xl">📄</div>
                    <div>
                      <h3 className="font-bold text-gray-800 text-lg">Resume Building</h3>
                      <p className="text-sm text-gray-500">Professional tailored resumes</p>
@@ -267,14 +267,14 @@ export default function Home() {
                    </div>
                 </div>
                 <div className="flex items-center gap-6 p-4 border border-gray-100 shadow-sm rounded-xl">
-                   <div className="bg-orange-100 text-orange-600 p-4 rounded-lg flex items-center justify-center text-3xl">??</div>
+                   <div className="bg-orange-100 text-orange-600 p-4 rounded-lg flex items-center justify-center text-3xl">📋</div>
                    <div>
                      <h3 className="font-bold text-gray-800 text-lg">Career Assessment</h3>
                      <p className="text-sm text-gray-500">Discover your strengths</p>
                    </div>
                 </div>
                 <div className="flex items-center gap-6 p-4 border border-gray-100 shadow-sm rounded-xl">
-                   <div className="bg-green-100 text-green-600 p-4 rounded-lg flex items-center justify-center text-3xl">??</div>
+                   <div className="bg-green-100 text-green-600 p-4 rounded-lg flex items-center justify-center text-3xl">💼</div>
                    <div>
                      <h3 className="font-bold text-gray-800 text-lg">Interview Prep</h3>
                      <p className="text-sm text-gray-500">Mock interviews & tips</p>
@@ -288,28 +288,28 @@ export default function Home() {
              <h3 className="text-2xl font-bold text-center text-primary mb-8 border-b pb-4">Study Abroad Counseling</h3>
              <div className="grid md:grid-cols-2 gap-8">
                 <div className="flex items-center gap-4">
-                   <div className="bg-teal-100 p-3 rounded-full text-3xl">??</div>
+                   <div className="bg-teal-100 p-3 rounded-full text-3xl">🌍</div>
                    <div>
                      <h4 className="font-bold text-gray-800">University Selection</h4>
                      <p className="text-sm text-gray-500">Find the right global fit</p>
                    </div>
                 </div>
                 <div className="flex items-center gap-4">
-                   <div className="bg-yellow-100 p-3 rounded-full text-3xl">??</div>
+                   <div className="bg-yellow-100 p-3 rounded-full text-3xl">💬</div>
                    <div>
                      <h4 className="font-bold text-gray-800">Application Strategy</h4>
                      <p className="text-sm text-gray-500">Crafting perfect essays</p>
                    </div>
                 </div>
                 <div className="flex items-center gap-4">
-                   <div className="bg-purple-100 p-3 rounded-full text-3xl">??</div>
+                   <div className="bg-purple-100 p-3 rounded-full text-3xl">📍</div>
                    <div>
                      <h4 className="font-bold text-gray-800">Visa Assistance</h4>
                      <p className="text-sm text-gray-500">End-to-end processing</p>
                    </div>
                 </div>
                 <div className="flex items-center gap-4">
-                   <div className="bg-pink-100 p-3 rounded-full text-3xl">??</div>
+                   <div className="bg-pink-100 p-3 rounded-full text-3xl">💻</div>
                    <div>
                      <h4 className="font-bold text-gray-800">Pre-departure Briefing</h4>
                      <p className="text-sm text-gray-500">Get ready to fly</p>
@@ -326,10 +326,10 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-6">Ready to build your future?</h2>
           <p className="text-xl mb-10 text-blue-100 max-w-2xl mx-auto">Get in touch with us today and let's discover the perfect path for your career journey.</p>
           <div className="flex flex-col md:flex-row justify-center gap-6 text-lg">
-            <a href={\mailto:\\} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
+            <a href={`mailto:${data.settings?.contactEmail || 'bertinkenfack@gmail.com'}`} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
               Email Us
             </a>
-            <a href={\	el:\\} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
+            <a href={`tel:${data.settings?.contactPhone || '9740403705'}`} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
               Call Now
             </a>
           </div>
