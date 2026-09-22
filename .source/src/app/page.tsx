@@ -33,7 +33,7 @@ export default function Home() {
     name: `Mentoria Package ${num}`,
     price: "Contact for price",
     description: "Comprehensive guidance for your career.",
-    fallbackImg: `/Mentoria${num}.png`
+    fallbackImg: `/Bertin-Kenfack-Voufo-/Mentoria${num}.png`
   }));
 
   return (
@@ -44,7 +44,7 @@ export default function Home() {
             {data.settings?.logo ? (
               <img src={urlFor(data.settings.logo).width(200).url()} alt="Logo" className="h-12 w-auto" />
             ) : (
-              <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+              <img src="/Bertin-Kenfack-Voufo-/logo.png" alt="Logo" className="h-12 w-auto" />
             )}
           </div>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 font-semibold">
@@ -72,7 +72,7 @@ export default function Home() {
              {data.founder?.photo ? (
                <img src={urlFor(data.founder.photo).width(600).url()} alt={data.founder.name} className="rounded-xl shadow-xl max-w-full h-auto" />
              ) : (
-               <img src="/founder.jpeg" alt="Founder" className="rounded-xl shadow-xl max-w-full h-auto" />
+               <img src="/Bertin-Kenfack-Voufo-/founder.jpeg" alt="Founder" className="rounded-xl shadow-xl max-w-full h-auto" />
              )}
           </div>
           <div className="md:w-1/2">
@@ -115,7 +115,7 @@ export default function Home() {
               {pkg.image ? (
                 <img src={urlFor(pkg.image).width(600).url()} alt={pkg.name} className="w-full h-64 object-cover" />
               ) : (
-                <img src={pkg.fallbackImg || "/Mentoria1.png"} alt={pkg.name} className="w-full h-64 object-cover" />
+                <img src={pkg.fallbackImg || "/Bertin-Kenfack-Voufo-/Mentoria1.png"} alt={pkg.name} className="w-full h-64 object-cover" />
               )}
               <div className="p-8 flex flex-col flex-grow">
                 <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
