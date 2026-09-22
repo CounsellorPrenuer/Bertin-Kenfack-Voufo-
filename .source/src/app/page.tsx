@@ -7,14 +7,14 @@ export default function Home() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    const query = {
+    const query = `{ 
       "settings": *[_type == "siteSettings"][0],
       "home": *[_type == "homePage"][0],
       "founder": *[_type == "founder"][0],
       "services": *[_type == "service"] | order(_createdAt asc),
       "packages": *[_type == "mentoriaPackage"] | order(_createdAt asc),
       "testimonials": *[_type == "testimonial"] | order(_createdAt asc)
-    }\;
+    }`
     
     client.fetch(query).then((res) => {
       setData(res);
