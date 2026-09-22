@@ -7,7 +7,7 @@ export default function Home() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    const query = \{
+    const query = {
       "settings": *[_type == "siteSettings"][0],
       "home": *[_type == "homePage"][0],
       "founder": *[_type == "founder"][0],
@@ -122,7 +122,8 @@ export default function Home() {
         <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">Choose the right plan to accelerate your career journey.</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(data.packages?.length > 0 ? data.packages : defaultPackages).map((pkg: any, idx: number) => (
-            <div key={idx} className={\ounded-2xl overflow-hidden transition duration-300 flex flex-col \\}>
+            <div key={idx} className={\
+ounded-2xl overflow-hidden transition duration-300 flex flex-col \}>
               {pkg.featured && (
                 <div className="bg-secondary text-white text-center py-2 text-sm font-bold uppercase tracking-wider">
                   Recommended
@@ -144,7 +145,7 @@ export default function Home() {
                     <li className="text-gray-500 italic">Features will be listed here.</li>
                   )}
                 </ul>
-                <a href="#contact" className={\lock w-full text-center font-bold py-4 rounded-xl transition \\}>
+                <a href="#contact" className={\lock w-full text-center font-bold py-4 rounded-xl transition \}>
                   Choose Package
                 </a>
               </div>
@@ -158,10 +159,10 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-6">Ready to build your future?</h2>
           <p className="text-xl mb-10 text-blue-100 max-w-2xl mx-auto">Get in touch with us today and let's discover the perfect path for your career journey.</p>
           <div className="flex flex-col md:flex-row justify-center gap-6 text-lg">
-            <a href={\mailto:\\} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition flex items-center justify-center gap-2">
+            <a href={\mailto:\} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition flex items-center justify-center gap-2">
               ? Email Us
             </a>
-            <a href={\	el:\\} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition flex items-center justify-center gap-2">
+            <a href={\	el:\} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition flex items-center justify-center gap-2">
               ?? Call Now
             </a>
           </div>
