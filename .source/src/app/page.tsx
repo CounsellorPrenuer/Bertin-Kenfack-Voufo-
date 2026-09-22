@@ -7,14 +7,14 @@ export default function Home() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    const query = `{ 
+    const query = `{
       "settings": *[_type == "siteSettings"][0],
       "home": *[_type == "homePage"][0],
       "founder": *[_type == "founder"][0],
       "services": *[_type == "service"] | order(_createdAt asc),
       "packages": *[_type == "mentoriaPackage"] | order(_createdAt asc),
       "testimonials": *[_type == "testimonial"] | order(_createdAt asc)
-    }`
+    }`;
     
     client.fetch(query).then((res) => {
       setData(res);
@@ -30,12 +30,12 @@ export default function Home() {
   ];
 
   const defaultPackages = [
-    { name: "Discover", price: "?5,500", features: ["Psychometric Assessment", "Career counseling session", "Stream selection", "Detailed report"] },
-    { name: "Discover Plus", price: "?15,000", features: ["Everything in Discover", "Multiple counseling sessions", "Long term planning", "Parent involvement"], featured: true },
-    { name: "Achieve Online", price: "?5,999", features: ["Online Assessment", "Virtual counseling", "Career roadmap"] },
-    { name: "Achieve Plus", price: "?10,500", features: ["Everything in Achieve", "In-person counseling", "Action plan execution"], featured: true },
-    { name: "Ascend Online", price: "?6,499", features: ["Skill gap analysis", "Virtual mentoring", "Industry insights"] },
-    { name: "Ascend Plus", price: "?10,599", features: ["Everything in Ascend", "Resume building", "Interview preparation"], featured: true }
+    { name: "Discover", price: "₹5,500", features: ["Psychometric Assessment", "Career counseling session", "Stream selection", "Detailed report"], featured: false },
+    { name: "Discover Plus", price: "₹15,000", features: ["Everything in Discover", "Multiple counseling sessions", "Long term planning", "Parent involvement"], featured: true },
+    { name: "Achieve Online", price: "₹5,999", features: ["Online Assessment", "Virtual counseling", "Career roadmap"], featured: false },
+    { name: "Achieve Plus", price: "₹10,500", features: ["Everything in Achieve", "In-person counseling", "Action plan execution"], featured: true },
+    { name: "Ascend Online", price: "₹6,499", features: ["Skill gap analysis", "Virtual mentoring", "Industry insights"], featured: false },
+    { name: "Ascend Plus", price: "₹10,599", features: ["Everything in Ascend", "Resume building", "Interview preparation"], featured: true }
   ];
 
   return (
@@ -87,7 +87,6 @@ export default function Home() {
                 <>
                   <p>I believe every person is born with unique talents that, when discovered and developed, can lead to a fulfilling and impactful career.</p>
                   <p>My mission is to help students, graduates, and professionals gain clarity about their strengths and guide them toward career paths where they can thrive and contribute meaningfully to society.</p>
-                  <p>Through thoughtful guidance, proven assessment tools, and meaningful conversations, I aim to empower individuals to make informed career decisions that lead to fulfillment, productivity, and long-term success.</p>
                 </>
               )}
             </div>
@@ -98,16 +97,13 @@ export default function Home() {
       <section id="services" className="bg-gray-50 py-20 px-4 border-t border-gray-200">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4 text-primary">Our Services</h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto text-lg">Comprehensive guidance for students, professionals, and institutions.</p>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
             {(data.services?.length > 0 ? data.services : defaultServices).map((service: any, idx: number) => (
               <div key={idx} className="bg-white p-8 rounded-2xl shadow-lg text-center hover:-translate-y-2 transition duration-300 border border-gray-100">
                 {service.image ? (
                   <img src={urlFor(service.image).width(400).url()} alt={service.name} className="w-full h-48 object-cover rounded-xl mb-6" />
                 ) : (
-                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                    ?
-                  </div>
+                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✓</div>
                 )}
                 <h3 className="text-2xl font-bold mb-4 text-gray-800">{service.name}</h3>
                 <p className="text-gray-600">{service.description}</p>
@@ -121,17 +117,18 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center mb-4 text-primary">Mentoria Packages</h2>
         <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">Choose the right plan to accelerate your career journey.</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {(data.packages?.length > 0 ? data.packages : defaultPackages).map((pkg: any, idx: number) => (
-            <div key={idx} className={\
-ounded-2xl overflow-hidden transition duration-300 flex flex-col \}>
-              {pkg.featured && (
+          {(data.packages?.length > 0 ? data.packages : defaultPackages).map((pkg: any, idx: number) => {
+            const isFeatured = pkg.featured === true;
+            return (
+            <div key={idx} className={`rounded-2xl overflow-hidden transition duration-300 flex flex-col ${isFeatured ? 'border-2 border-secondary shadow-2xl relative scale-105 z-10' : 'border border-gray-200 shadow-xl'}`}>
+              {isFeatured && (
                 <div className="bg-secondary text-white text-center py-2 text-sm font-bold uppercase tracking-wider">
                   Recommended
                 </div>
               )}
               <div className="bg-primary p-6 text-white text-center">
                 <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                <div className="text-3xl font-extrabold">{pkg.price}</div>
+                <div className="text-3xl font-extrabold">{pkg.price || 'Contact for price'}</div>
               </div>
               <div className="p-8 flex flex-col flex-grow bg-white">
                 <ul className="mb-8 space-y-4 flex-grow">
@@ -142,15 +139,16 @@ ounded-2xl overflow-hidden transition duration-300 flex flex-col \}>
                     </li>
                   ))}
                   {(!pkg.features || pkg.features.length === 0) && (
-                    <li className="text-gray-500 italic">Features will be listed here.</li>
+                    <li className="text-gray-500 italic text-sm">{pkg.description || 'Comprehensive guidance for your career.'}</li>
                   )}
                 </ul>
-                <a href="#contact" className={\lock w-full text-center font-bold py-4 rounded-xl transition \}>
+                <a href="#contact" className={`block w-full text-center font-bold py-4 rounded-xl transition ${isFeatured ? 'bg-secondary text-white hover:bg-yellow-600' : 'bg-gray-100 text-primary hover:bg-gray-200'}`}>
                   Choose Package
                 </a>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -159,11 +157,11 @@ ounded-2xl overflow-hidden transition duration-300 flex flex-col \}>
           <h2 className="text-4xl font-bold mb-6">Ready to build your future?</h2>
           <p className="text-xl mb-10 text-blue-100 max-w-2xl mx-auto">Get in touch with us today and let's discover the perfect path for your career journey.</p>
           <div className="flex flex-col md:flex-row justify-center gap-6 text-lg">
-            <a href={\mailto:\} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition flex items-center justify-center gap-2">
-              ? Email Us
+            <a href={`mailto:${data.settings?.contactEmail || 'bertinkenfack@gmail.com'}`} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
+              Email Us
             </a>
-            <a href={\	el:\} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition flex items-center justify-center gap-2">
-              ?? Call Now
+            <a href={`tel:${data.settings?.contactPhone || '9740403705'}`} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
+              Call Now
             </a>
           </div>
         </div>
@@ -172,7 +170,6 @@ ounded-2xl overflow-hidden transition duration-300 flex flex-col \}>
       <footer className="bg-gray-900 text-gray-400 py-12 px-4 text-center">
         <div className="container mx-auto">
           <p className="mb-4">&copy; {new Date().getFullYear()} Career Compass Global. All rights reserved.</p>
-          <p className="text-sm">Find your direction. Build your future.</p>
         </div>
       </footer>
     </div>
