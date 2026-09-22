@@ -7,14 +7,14 @@ export default function Home() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    const query = \{
+    const query = `{
       "settings": *[_type == "siteSettings"][0],
       "home": *[_type == "homePage"][0],
       "founder": *[_type == "founder"][0],
       "services": *[_type == "service"] | order(_createdAt asc),
       "packages": *[_type == "mentoriaPackage"] | order(_createdAt asc),
       "testimonials": *[_type == "testimonial"] | order(_createdAt asc)
-    }\;
+    }`;
     
     client.fetch(query).then((res) => {
       setData(res);
@@ -30,8 +30,8 @@ export default function Home() {
   ];
 
   const defaultPackages = [1, 2, 3, 4, 5, 6].map(num => ({
-    name: \Mentoria Package \\,
-    fallbackImg: \/Bertin-Kenfack-Voufo-/Mentoria\.png\
+    name: `Mentoria Package ${num}`,
+    fallbackImg: `/Bertin-Kenfack-Voufo-/Mentoria${num}.png`
   }));
 
   return (
@@ -99,7 +99,7 @@ export default function Home() {
                 {service.image ? (
                   <img src={urlFor(service.image).width(400).url()} alt={service.name} className="w-full h-48 object-cover rounded-xl mb-6" />
                 ) : (
-                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">?</div>
+                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✓</div>
                 )}
                 <h3 className="text-2xl font-bold mb-4 text-gray-800">{service.name}</h3>
                 <p className="text-gray-600">{service.description}</p>
@@ -131,10 +131,10 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-6">Ready to build your future?</h2>
           <p className="text-xl mb-10 text-blue-100 max-w-2xl mx-auto">Get in touch with us today and let's discover the perfect path for your career journey.</p>
           <div className="flex flex-col md:flex-row justify-center gap-6 text-lg">
-            <a href={\mailto:\\} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
+            <a href={`mailto:${data.settings?.contactEmail || 'bertinkenfack@gmail.com'}`} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
               Email Us
             </a>
-            <a href={\	el:\\} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
+            <a href={`tel:${data.settings?.contactPhone || '9740403705'}`} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
               Call Now
             </a>
           </div>
