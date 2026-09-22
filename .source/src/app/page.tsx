@@ -23,8 +23,14 @@ export default function Home() {
 
   if (!data) return <div className="min-h-screen flex items-center justify-center">Loading Career Compass Global...</div>;
 
+  const defaultServices = [
+    { name: "Career Guidance", description: "Expert advice to find your direction." },
+    { name: "Workshops & Seminars", description: "Interactive sessions to build your skills." },
+    { name: "Admission Guidance", description: "Step-by-step help for college admissions." }
+  ];
+
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans">
+    <div className="min-h-screen bg-white text-gray-900 font-sans scroll-smooth">
       <nav className="sticky top-0 bg-white shadow-md z-50">
         <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
           <div className="text-2xl font-bold flex items-center gap-2 mb-4 md:mb-0">
@@ -36,13 +42,70 @@ export default function Home() {
           </div>
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 font-semibold text-sm md:text-base">
             <a href="#home" className="hover:text-blue-600 transition">Home</a>
+            <a href="#about" className="hover:text-blue-600 transition">About Founder</a>
+            <a href="#services" className="hover:text-blue-600 transition">Services</a>
             <a href="#packages" className="hover:text-blue-600 transition">Mentoria Packages</a>
+            <a href="#testimonials" className="hover:text-blue-600 transition">Testimonials</a>
+            <a href="#contact" className="hover:text-blue-600 transition">Contact Us</a>
           </div>
         </div>
       </nav>
 
-      <section className="py-12 px-4 container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12 text-[#002B5B]">Mentoria Packages</h2>
+      <section id="home" className="bg-[#002B5B] text-white py-24 px-4 text-center">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6">{data.home?.heroHeading || "Find your direction. Build your future."}</h1>
+        <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-blue-100">{data.home?.heroDescription || "Career Guidance, Workshops & Seminars, Admission Guidance"}</p>
+        <a href="#contact" className="bg-[#D49A36] hover:bg-yellow-600 text-white font-bold py-4 px-10 rounded-full text-lg transition shadow-lg inline-block">
+          {data.home?.ctaText || "Get Started"}
+        </a>
+      </section>
+
+      <section id="about" className="py-20 px-4 container mx-auto">
+        <div className="flex flex-col md:flex-row items-center gap-12">
+          <div className="md:w-1/2 flex justify-center">
+             {data.founder?.photo ? (
+               <img src={urlFor(data.founder.photo).width(600).url()} alt={data.founder.name} className="rounded-xl shadow-2xl max-w-full h-auto border-4 border-white" />
+             ) : (
+               <img src="/Bertin-Kenfack-Voufo-/founder.jpeg" alt="Founder" className="rounded-xl shadow-2xl max-w-full h-auto border-4 border-white" />
+             )}
+          </div>
+          <div className="md:w-1/2">
+            <h2 className="text-4xl font-bold mb-4 text-[#002B5B]">About {data.founder?.name || "Bertin Kenfack Voufo"}</h2>
+            <h3 className="text-xl text-[#D49A36] mb-6 font-semibold">{data.founder?.title || "Founder & Career Counselor"}</h3>
+            <div className="text-lg leading-relaxed text-gray-700 space-y-4">
+              {data.founder?.biography ? (
+                <p>{data.founder.biography}</p>
+              ) : (
+                <>
+                  <p>I believe every person is born with unique talents that, when discovered and developed, can lead to a fulfilling and impactful career.</p>
+                  <p>My mission is to help students, graduates, and professionals gain clarity about their strengths and guide them toward career paths where they can thrive and contribute meaningfully to society.</p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="bg-gray-50 py-20 px-4 border-t border-gray-200">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4 text-[#002B5B]">Our Services</h2>
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            {(data.services?.length > 0 ? data.services : defaultServices).map((service: any, idx: number) => (
+              <div key={idx} className="bg-white p-8 rounded-2xl shadow-lg text-center hover:-translate-y-2 transition duration-300 border border-gray-100">
+                {service.image ? (
+                  <img src={urlFor(service.image).width(400).url()} alt={service.name} className="w-full h-48 object-cover rounded-xl mb-6" />
+                ) : (
+                  <div className="w-16 h-16 bg-blue-100 text-[#002B5B] rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✓</div>
+                )}
+                <h3 className="text-2xl font-bold mb-4 text-gray-800">{service.name}</h3>
+                <p className="text-gray-600">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="packages" className="py-20 px-4 container mx-auto bg-gray-50">
+        <h2 className="text-4xl font-bold text-center mb-12 text-[#002B5B]">Mentoria Packages</h2>
         
         <div className="space-y-10 max-w-4xl mx-auto">
           
@@ -286,6 +349,27 @@ export default function Home() {
 
         </div>
       </section>
+
+      <section id="contact" className="bg-[#002B5B] text-white py-24 px-4">
+        <div className="container mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">Ready to build your future?</h2>
+          <p className="text-xl mb-10 text-blue-100 max-w-2xl mx-auto">Get in touch with us today and let's discover the perfect path for your career journey.</p>
+          <div className="flex flex-col md:flex-row justify-center gap-6 text-lg">
+            <a href={`mailto:${data.settings?.contactEmail || 'bertinkenfack@gmail.com'}`} className="bg-white text-[#002B5B] px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
+              Email Us
+            </a>
+            <a href={`tel:${data.settings?.contactPhone || '9740403705'}`} className="bg-[#D49A36] text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
+              Call Now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-gray-900 text-gray-400 py-12 px-4 text-center">
+        <div className="container mx-auto">
+          <p className="mb-4">&copy; {new Date().getFullYear()} Career Compass Global. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
