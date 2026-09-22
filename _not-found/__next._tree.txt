@@ -1,2 +1,2 @@
-:HL["/Bertin-Kenfack-Voufo-/_next/static/chunks/3epbb994h64bn.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"pajGFmW9IROwELkgtxi0I"}
+:HL["/Bertin-Kenfack-Voufo-/_next/static/chunks/3miwb3mc-w55j.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"1nx5j-sKBw2NkIlqcSQHQ"}

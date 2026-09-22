@@ -138,13 +138,16 @@ export default function Home() {
                     )}
                     {activeSubTab === 'working' && (
                       <>
-                        <h3 className="text-3xl font-bold text-[#7B8AF3] text-center mb-2">Ascend Premium</h3>
-                        <div className="text-center mb-8"><span className="text-xl text-[#7B8AF3]">₹</span><span className="text-4xl font-bold text-[#7B8AF3]">15,499</span></div>
+                        <h3 className="text-3xl font-bold text-[#7B8AF3] text-center mb-2">Ascend Online</h3>
+                        <div className="text-center mb-8"><span className="text-xl text-[#7B8AF3]">₹</span><span className="text-4xl font-bold text-[#7B8AF3]">6,499</span></div>
                         <ul className="space-y-4 mb-10 text-sm text-gray-600">
                           <li className="flex items-start"><span className="text-[#7B8AF3] font-bold mr-3 text-lg">✓</span> Psychometric assessment to measure your interests, personality and abilities</li>
                           <li className="flex items-start"><span className="text-[#7B8AF3] font-bold mr-3 text-lg">✓</span> 1 career counselling session</li>
                           <li className="flex items-start"><span className="text-[#7B8AF3] font-bold mr-3 text-lg">✓</span> Lifetime access to Knowledge Gateway</li>
+                          <li className="flex items-start"><span className="text-[#7B8AF3] font-bold mr-3 text-lg">✓</span> Pre-recorded webinars by industry experts</li>
                           <li className="flex items-start text-gray-400 line-through"><span className="text-[#7B8AF3] font-bold mr-3 text-lg">✕</span> Customised reports after each session</li>
+                          <li className="flex items-start text-gray-400 line-through"><span className="text-[#7B8AF3] font-bold mr-3 text-lg">✕</span> Guidance on studying abroad</li>
+                          <li className="flex items-start text-gray-400 line-through"><span className="text-[#7B8AF3] font-bold mr-3 text-lg">✕</span> CV reviews for job application</li>
                         </ul>
                       </>
                     )}
@@ -206,14 +209,16 @@ export default function Home() {
                     )}
                     {activeSubTab === 'working' && (
                       <>
-                        <h3 className="text-3xl font-bold text-[#2748D8] text-center mb-2">Ascend Executive</h3>
-                        <div className="text-center mb-8"><span className="text-xl text-[#2748D8]">₹</span><span className="text-4xl font-bold text-[#2748D8]">20,599</span></div>
+                        <h3 className="text-3xl font-bold text-[#2748D8] text-center mb-2">Ascend Plus+</h3>
+                        <div className="text-center mb-8"><span className="text-xl text-[#2748D8]">₹</span><span className="text-4xl font-bold text-[#2748D8]">10,599</span></div>
                         <ul className="space-y-4 mb-10 text-sm text-gray-600">
                           <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> Psychometric assessment to measure your interests, personality and abilities</li>
-                          <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> 4 career counselling sessions</li>
+                          <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> 3 career counselling sessions</li>
                           <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> Lifetime access to Knowledge Gateway</li>
                           <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> Attend live webinars by industry experts</li>
                           <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> Customised reports after each session</li>
+                          <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> Guidance on studying abroad</li>
+                          <li className="flex items-start"><span className="text-[#2748D8] font-bold mr-3 text-lg">✓</span> CV reviews for job application</li>
                         </ul>
                       </>
                     )}
@@ -358,7 +363,7 @@ export default function Home() {
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to build your future?</h2>
           <p className="text-xl mb-10 text-blue-100 max-w-2xl mx-auto">Get in touch with us today and let's discover the perfect path for your career journey.</p>
-          <div className="flex flex-col md:flex-row justify-center gap-6 text-lg">
+          <div className="flex flex-col md:flex-row justify-center gap-6 text-lg mb-12">
             <a href={`mailto:${data.settings?.contactEmail || 'bertinkenfack@gmail.com'}`} className="bg-white text-[#002B5B] px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
               Email Us
             </a>
@@ -366,6 +371,22 @@ export default function Home() {
               Call Now
             </a>
           </div>
+          
+          <form className="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg text-left">
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
+              <input type="text" id="name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#002B5B] text-gray-900" placeholder="Your Name" required />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
+              <input type="email" id="email" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#002B5B] text-gray-900" placeholder="Your Email" required />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="message" className="block text-gray-700 font-bold mb-2">Message</label>
+              <textarea id="message" rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#002B5B] text-gray-900" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" className="w-full bg-[#D49A36] text-white font-bold py-3 px-4 rounded-md hover:bg-yellow-600 transition">Send Message</button>
+          </form>
         </div>
       </section>
 
