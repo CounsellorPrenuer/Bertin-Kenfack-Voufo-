@@ -7,14 +7,14 @@ export default function Home() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    const query = `{
+    const query = \{
       "settings": *[_type == "siteSettings"][0],
       "home": *[_type == "homePage"][0],
       "founder": *[_type == "founder"][0],
       "services": *[_type == "service"] | order(_createdAt asc),
       "packages": *[_type == "mentoriaPackage"] | order(_createdAt asc),
       "testimonials": *[_type == "testimonial"] | order(_createdAt asc)
-    }`;
+    }\;
     
     client.fetch(query).then((res) => {
       setData(res);
@@ -29,14 +29,10 @@ export default function Home() {
     { name: "Admission Guidance", description: "Step-by-step help for college admissions." }
   ];
 
-  const defaultPackages = [
-    { name: "Discover", price: "₹5,500", features: ["Psychometric Assessment", "Career counseling session", "Stream selection", "Detailed report"], featured: false },
-    { name: "Discover Plus", price: "₹15,000", features: ["Everything in Discover", "Multiple counseling sessions", "Long term planning", "Parent involvement"], featured: true },
-    { name: "Achieve Online", price: "₹5,999", features: ["Online Assessment", "Virtual counseling", "Career roadmap"], featured: false },
-    { name: "Achieve Plus", price: "₹10,500", features: ["Everything in Achieve", "In-person counseling", "Action plan execution"], featured: true },
-    { name: "Ascend Online", price: "₹6,499", features: ["Skill gap analysis", "Virtual mentoring", "Industry insights"], featured: false },
-    { name: "Ascend Plus", price: "₹10,599", features: ["Everything in Ascend", "Resume building", "Interview preparation"], featured: true }
-  ];
+  const defaultPackages = [1, 2, 3, 4, 5, 6].map(num => ({
+    name: \Mentoria Package \\,
+    fallbackImg: \/Bertin-Kenfack-Voufo-/Mentoria\.png\
+  }));
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
@@ -103,7 +99,7 @@ export default function Home() {
                 {service.image ? (
                   <img src={urlFor(service.image).width(400).url()} alt={service.name} className="w-full h-48 object-cover rounded-xl mb-6" />
                 ) : (
-                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✓</div>
+                  <div className="w-16 h-16 bg-blue-100 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">?</div>
                 )}
                 <h3 className="text-2xl font-bold mb-4 text-gray-800">{service.name}</h3>
                 <p className="text-gray-600">{service.description}</p>
@@ -114,38 +110,16 @@ export default function Home() {
       </section>
 
       <section id="packages" className="py-20 px-4 container mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-4 text-primary">Mentoria Packages</h2>
-        <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">Choose the right plan to accelerate your career journey.</p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <h2 className="text-4xl font-bold text-center mb-12 text-primary">Mentoria Packages</h2>
+        <div className="grid md:grid-cols-2 gap-10">
           {(data.packages?.length > 0 ? data.packages : defaultPackages).map((pkg: any, idx: number) => {
-            const isFeatured = pkg.featured === true;
             return (
-            <div key={idx} className={`rounded-2xl overflow-hidden transition duration-300 flex flex-col ${isFeatured ? 'border-2 border-secondary shadow-2xl relative scale-105 z-10' : 'border border-gray-200 shadow-xl'}`}>
-              {isFeatured && (
-                <div className="bg-secondary text-white text-center py-2 text-sm font-bold uppercase tracking-wider">
-                  Recommended
-                </div>
+            <div key={idx} className="flex justify-center">
+              {pkg.image ? (
+                <img src={urlFor(pkg.image).width(1200).url()} alt={pkg.name} className="max-w-full h-auto rounded-xl shadow-lg border border-gray-200" />
+              ) : (
+                <img src={pkg.fallbackImg} alt={pkg.name} className="max-w-full h-auto rounded-xl shadow-lg border border-gray-200" />
               )}
-              <div className="bg-primary p-6 text-white text-center">
-                <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                <div className="text-3xl font-extrabold">{pkg.price || 'Contact for price'}</div>
-              </div>
-              <div className="p-8 flex flex-col flex-grow bg-white">
-                <ul className="mb-8 space-y-4 flex-grow">
-                  {(pkg.features || []).map((feature: string, fIdx: number) => (
-                    <li key={fIdx} className="flex items-start">
-                      <svg className="w-5 h-5 text-secondary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                  {(!pkg.features || pkg.features.length === 0) && (
-                    <li className="text-gray-500 italic text-sm">{pkg.description || 'Comprehensive guidance for your career.'}</li>
-                  )}
-                </ul>
-                <a href="#contact" className={`block w-full text-center font-bold py-4 rounded-xl transition ${isFeatured ? 'bg-secondary text-white hover:bg-yellow-600' : 'bg-gray-100 text-primary hover:bg-gray-200'}`}>
-                  Choose Package
-                </a>
-              </div>
             </div>
             );
           })}
@@ -157,10 +131,10 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-6">Ready to build your future?</h2>
           <p className="text-xl mb-10 text-blue-100 max-w-2xl mx-auto">Get in touch with us today and let's discover the perfect path for your career journey.</p>
           <div className="flex flex-col md:flex-row justify-center gap-6 text-lg">
-            <a href={`mailto:${data.settings?.contactEmail || 'bertinkenfack@gmail.com'}`} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
+            <a href={\mailto:\\} className="bg-white text-primary px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-gray-100 transition">
               Email Us
             </a>
-            <a href={`tel:${data.settings?.contactPhone || '9740403705'}`} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
+            <a href={\	el:\\} className="bg-secondary text-white px-8 py-4 rounded-xl shadow-lg font-bold hover:bg-yellow-600 transition">
               Call Now
             </a>
           </div>
